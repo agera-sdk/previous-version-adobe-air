@@ -346,6 +346,7 @@ package com.rialight.intl.ftl
                                 urlReq.method = 'get';
                                 urlReq.contentType = 'application/text';
                                 var urlLoader:URLLoader = new URLLoader;
+                                urlLoader.dataFormat = 'text';
                                 urlLoader.addEventListener('complete', function(e:*):void
                                 {
                                     FTL.addFTLBundleResource(fileName, urlLoader.data, bundle);
