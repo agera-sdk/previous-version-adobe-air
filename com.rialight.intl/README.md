@@ -9,7 +9,7 @@ For implementation reference, see:
 
 Implementation:
 
-- [ ] Locale
+- [x] Locale
 - [ ] FTL
   - Fluent Syntax Guide: https://projectfluent.org/fluent/guide/
 - [ ] Collator

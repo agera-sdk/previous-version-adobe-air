@@ -42,6 +42,11 @@ package com.rialight.intl
             }
         }
 
+        public function get language():String
+        {
+            return this.m_fgLocale.getLanguage();
+        }
+
         public function get region():String
         {
             return this.m_fgLocale.getRegion();
