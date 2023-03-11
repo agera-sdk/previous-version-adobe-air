@@ -480,6 +480,10 @@ package com.rialight.intl.ftl
             return null;
         }
 
+        /**
+         * Clones the FTL object, but returning an object that is
+         * in sync with the original FTL object.
+         */
         public function clone():FTL
         {
             var r:FTL = new FTL(PRIVATE_CONSTRUCTOR);
