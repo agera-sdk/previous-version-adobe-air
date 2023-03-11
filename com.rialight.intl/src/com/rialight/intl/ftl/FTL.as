@@ -34,6 +34,7 @@ package com.rialight.intl.ftl
 
         private var m_assetSource:String;
         private var m_assetFiles:Vector.<String>;
+        private var m_bundleInitializers:Vector.<Function> = new Vector.<Function>;
         private var m_cleanUnusedAssets:Boolean;
         private var m_loadMethod:String;
 
@@ -143,6 +144,15 @@ package com.rialight.intl.ftl
         } // FTL constructor
 
         /**
+         * Adds a bundle initializer. This allows defining custom functions and more.
+         * @param fn Function of the signature <code>function(locale:Locale, bundle:FluentBundle):void</code>.
+         */
+        public function addBundleInitializer(fn:Function):void
+        {
+            m_bundleInitializers.push(fn);
+        }
+
+        /**
          * Returns a set of supported locales, reflecting
          * the ones that were specified when constructing the <code>FTL</code> object.
          */
@@ -249,8 +259,10 @@ package com.rialight.intl.ftl
                         }
                         self.m_currentLocale = newLocale;
 
-                        // @todo run locale initializers
-                        // ...
+                        for each (var bundleInit:Function in self.m_bundleInitializers)
+                        {
+                            bundleInit(newLocale, m_assets.get(newLocale.toString()));
+                        }
 
                         resolve(true);
                     })
