@@ -9,8 +9,15 @@ package com.rialight.intl.ftl
     import com.rialight.intl.ftl.internals.bundle.resolver.resolveComplexPattern;
     import com.rialight.util.*;
 
+    /**
+     * Provides manipulations for FTL of a single locale. You need not
+     * construct <code>FluentBundle</code> explicitly.
+     */
     public final class FluentBundle
     {
+        /**
+         * List of locales associated to the <code>FluentBundle</code> object.
+         */
         public var locales:Array;
 
         /**
@@ -38,6 +45,9 @@ package com.rialight.intl.ftl
          */
         public var _intls:Map;
 
+        /**
+         * @private
+         */
         public function FluentBundle(locales:*, options:* = undefined)
         {
             options ||= {};
@@ -61,31 +71,50 @@ package com.rialight.intl.ftl
             this._intls = getMemoizerForLocale(locales);;
         }
 
+        /**
+         * Sets a customized Fluent function.
+         */
         public function setFunction(name:String, fn:Function):void
         {
             this._functions[name] = fn;
         }
 
+        /**
+         * Indicates a Fluent transform function.
+         */
         public function get transform():Function
         {
             return this._transform;
         }
 
+        /**
+         * Indicates a Fluent transform function.
+         */
         public function set transform(fn:Function):void
         {
             this._transform = fn;
         }
 
+        /**
+         * Determines if the bundle contains a message identified by <i>id</i>.
+         */
         public function hasMessage(id:String):Boolean
         {
             return this._messages.has(id);
         }
 
+        /**
+         * Retrieves a message identified by <i>id</i> or
+         * returns <code>undefined</code> if none.
+         */
         public function getMessage(id:String):*
         {
             return this._messages.get(id);
         }
 
+        /**
+         * Adds a Fluent resource to the bundle.
+         */
         public function addResource
         (
             res:FluentResource,
@@ -131,6 +160,9 @@ package com.rialight.intl.ftl
             return errors;
         }
 
+        /**
+         * Formats a pattern.
+         */
         public function formatPattern
         (
             pattern:*,
