@@ -5,6 +5,12 @@ package com.rialight.intl.ftl
     import com.rialight.util.*;
     import com.rialight.intl.ftl.internals.bundle.FluentResource;
 
+    import flash.net.URLRequest;
+    import flash.net.URLLoader;
+    import flash.filesystem.File;
+    import flash.filesystem.FileStream;
+    import flash.utils.ByteArray;
+
     /**
      * Interface for working with Fluent Translation Lists.
      */
@@ -276,6 +282,43 @@ package com.rialight.intl.ftl
         // should resolve to [String, FluentBundle] (the first String is locale.toString())
         private function loadSingleLocale(locale:Locale):Promise
         {
+            var self:FTL = this;
+            var localeAsStr:String = locale.toString();
+
+            if (self.m_loadMethod == 'fileSystem')
+            {
+                var bundle:FluentBundle = new FluentBundle(locale);
+                for each (var fileName:String in self.m_assetFiles)
+                {
+                    var localePathComp:* = self.m_localeToPathComponents.get(localeAsStr);
+                    if (localePathComp === undefined)
+                    {
+                        throw new Error('Fallback is not a supported locale: ' + localeAsStr);
+                    }
+                    var resPath:String = format('$1/$2/$3.ftl', [self.m_assetSource, localePathComp, fileName]);
+                    try
+                    {
+                        var fileStream:FileStream = new FileStream;
+                        fileStream.open(new File(resPath), 'read');
+                        var source:String = fileStream.readUTF();
+                        fileStream.close();
+                        FTL.addFTLBundleResource(fileName, source, bundle);
+                    }
+                    catch (err:*)
+                    {
+                        trace('Failed to load resource at ' + resPath);
+                        return Promise.reject(undefined);
+                    }
+                }
+                return Promise.resolve([localeAsStr, bundle]);
+            }
+            else
+            {
+                return Promise.all
+                (
+                    //
+                );
+            }
         }
     }
 }
