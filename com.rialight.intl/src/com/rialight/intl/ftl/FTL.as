@@ -249,8 +249,11 @@ package com.rialight.intl.ftl
                 self._enumerateFallbacks(newLocale.toString(), toLoad);
 
                 var newAssets:Map = new Map;
-                Promise.all(toLoad.toArray()
-                    .map(function(a:Locale):Promise { return self.loadSingleLocale(a) }))
+                Promise
+                    .all
+                    (
+                        toLoad.toArray().map(function(a:Locale):Promise { return self.loadSingleLocale(a) })
+                    )
                     .then(function(res:Array):void
                     {
                         // res:[[String, FluentBundle]]
@@ -279,15 +282,25 @@ package com.rialight.intl.ftl
             });
         } // load
 
+        private function get _assetFilesAsUntyped():Array
+        {
+            var r:Array = [];
+            for each (var v:String in m_assetFiles)
+            {
+                r.push(v);
+            }
+            return r;
+        }
+
         // should resolve to [String, FluentBundle] (the first String is locale.toString())
         private function loadSingleLocale(locale:Locale):Promise
         {
             var self:FTL = this;
             var localeAsStr:String = locale.toString();
+            var bundle:FluentBundle = new FluentBundle(locale);
 
             if (self.m_loadMethod == 'fileSystem')
             {
-                var bundle:FluentBundle = new FluentBundle(locale);
                 for each (var fileName:String in self.m_assetFiles)
                 {
                     var localePathComp:* = self.m_localeToPathComponents.get(localeAsStr);
@@ -316,8 +329,19 @@ package com.rialight.intl.ftl
             {
                 return Promise.all
                 (
-                    //
-                );
+                    self._assetFilesAsUntyped.map
+                    (
+                        function(fileName:String):Promise
+                        {
+                            ...
+                            return;
+                        }
+                    )
+                )
+                    .then(function(_:*):Array
+                    {
+                        return [localeAsStr, bundle];
+                    });
             }
         }
     }
