@@ -75,6 +75,9 @@ package com.rialight.intl.ftl
 
         private static const PRIVATE_CONSTRUCTOR:* = {};
 
+        /**
+         * Constructs a FTL object.
+         */
         public function FTL(options:*)
         {
             if (options === PRIVATE_CONSTRUCTOR)
@@ -144,5 +147,82 @@ package com.rialight.intl.ftl
          * Returns a set of supported locales, reflecting
          * the ones that were specified when constructing the <code>FTL</code> object.
          */
+        public function get supportedLocales():Set
+        {
+            var r:Set = new Set;
+            for each (var v:String in m_supportedLocales)
+            {
+                r.add(new Locale(v));
+            }
+            return r;
+        }
+
+        /**
+         * Returns <code>true</code> if the locale is one of the supported locales
+         * that were specified when constructing the <code>FTL</code> object,
+         * otherwise <code>false</code>.
+         */
+        public function supportsLocale(argument:Locale):Boolean
+        {
+            return m_supportedLocales.has(argument.toString());
+        }
+
+        /**
+         * Returns the currently loaded locale or null if none.
+         */
+        public function get currentLocale():Locale
+        {
+            return m_currentLocale;
+        }
+
+        /**
+         * Returns the currently loaded locale followed by its fallbacks or empty if no locale is loaded.
+         */
+        public function get localeAndFallbacks():Vector.<Locale>
+        {
+            if (m_currentLocale)
+            {
+                var r:Vector.<Locale> = new Vector.<Locale>([m_currentLocale]);
+                _enumerateFallbacks(m_currentLocale.toString(), r);
+                return r;
+            }
+            return new Vector.<Locale>;
+        }
+
+        /**
+         * Returns the currently loaded fallbacks.
+         */
+        public function get fallbacks():Vector.<Locale>
+        {
+            if (m_currentLocale)
+            {
+                var r:Vector.<Locale> = new Vector.<Locale>;
+                _enumerateFallbacks(m_currentLocale.toString(), r);
+                return r;
+            }
+            return new Vector.<Locale>;
+        }
+
+        /**
+         * Adds a callback function to initialize the <code>FluentBundle</code> object of a locale.
+         * The callback is called when the locale is loaded.
+         */
+        /*
+         * function initializeLocale(callback:Function):void;
+         */
+
+        /**
+         * Attempts to load a locale and its fallbacks.
+         * If the locale argument is specified, it is loaded.
+         * Otherwise, if there is a default locale, it is loaded, and if not,
+         * the method throws an error.
+         * 
+         * <p>If any resource fails to load, the returned Promise
+         * resolves to <code>false</code>, otherwise <code>true</code>.</p>
+         */
+        public function load(newLocale:Locale = null):Promise
+        {
+            //
+        }
     }
 }
