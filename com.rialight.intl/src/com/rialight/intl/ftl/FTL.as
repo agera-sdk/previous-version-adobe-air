@@ -484,7 +484,16 @@ package com.rialight.intl.ftl
         {
             var r:FTL = new FTL(PRIVATE_CONSTRUCTOR);
             r.m_currentLocale = this.m_currentLocale;
-            ...
+            r.m_localeToPathComponents = this.m_localeToPathComponents;
+            r.m_supportedLocales = this.m_supportedLocales;
+            r.m_defaultLocale = this.m_defaultLocale;
+            r.m_fallbacks = this.m_fallbacks;
+            r.m_bundleInitializers = this.m_bundleInitializers;
+            r.m_assets = this.m_assets;
+            r.m_assetSource = this.m_assetSource;
+            r.m_assetFiles = this.m_assetFiles;
+            r.m_cleanUnusedAssets = this.m_cleanUnusedAssets;
+            r.m_loadMethod = this.m_loadMethod;
             return r;
         }
     }
