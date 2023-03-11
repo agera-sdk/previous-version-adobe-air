@@ -1,25 +1,41 @@
-package com.rialight.intl.ftl.internals.bundle
+package com.rialight.intl.ftl
 {
     import com.rialight.intl.*;
     import com.rialight.intl.ftl.*;
     import com.rialight.intl.ftl.types.*;
+    import com.rialight.intl.ftl.internals.bundle.*;
     import com.rialight.intl.ftl.internals.bundle.ast.*;
     import com.rialight.intl.ftl.internals.bundle.builtins.*;
     import com.rialight.intl.ftl.internals.bundle.resolver.resolveComplexPattern;
     import com.rialight.util.*;
 
-    /**
-     * @private
-     */
     public final class FluentBundle
     {
         public var locales:Array;
 
+        /**
+         * @private
+         */
         public var _terms:Map = new Map;
+        /**
+         * @private
+         */
         public var _messages:Map = new Map;
+        /**
+         * @private
+         */
         public var _functions:*;
+        /**
+         * @private
+         */
         public var _useIsolating:Boolean;
+        /**
+         * @private
+         */
         public var _transform:Function;
+        /**
+         * @private
+         */
         public var _intls:Map;
 
         public function FluentBundle(locales:*, options:* = undefined)
@@ -43,6 +59,21 @@ package com.rialight.intl.ftl.internals.bundle
             this._useIsolating = useIsolating;
             this._transform = transform;
             this._intls = getMemoizerForLocale(locales);;
+        }
+
+        public function setFunction(name:String, fn:Function):void
+        {
+            this._functions[name] = fn;
+        }
+
+        public function get transform():Function
+        {
+            return this._transform;
+        }
+
+        public function set transform(fn:Function):void
+        {
+            this._transform = fn;
         }
 
         public function hasMessage(id:String):Boolean

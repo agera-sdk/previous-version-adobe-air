@@ -3,7 +3,6 @@ package com.rialight.intl.ftl
     import com.rialight.intl.*;
     import com.rialight.intl.ftl.types.*;
     import com.rialight.util.*;
-    import com.rialight.intl.ftl.internals.bundle.FluentBundle;
     import com.rialight.intl.ftl.internals.bundle.FluentResource;
 
     /**
@@ -233,14 +232,38 @@ package com.rialight.intl.ftl
                 var toLoad:Set = new Set([newLocale]);
                 self._enumerateFallbacks(newLocale.toString(), toLoad);
 
-                var locale:Locale = null;
-
                 var newAssets:Map = new Map;
-                for each (locale in toLoad)
-                {
-                    var res:FluentBundle = self.loadSingleLocale(locale);
-                }
+                Promise.all(toLoad.toArray()
+                    .map(function(a:Locale):Promise { return self.loadSingleLocale(a) }))
+                    .then(function(res:Array):void
+                    {
+                        // res:[[String, FluentBundle]]
+                        if (self.m_cleanUnusedAssets)
+                        {
+                            self.m_assets.clear();
+                        }
+
+                        for each (var pair:Array in res)
+                        {
+                            self.m_assets.set(pair[0], pair[1]);
+                        }
+                        self.m_currentLocale = newLocale;
+
+                        // @todo run locale initializers
+                        // ...
+
+                        resolve(true);
+                    })
+                    .otherwise(function(_:*):void
+                    {
+                        resolve(false);
+                    });
             });
+        } // load
+
+        // should resolve to [String, FluentBundle] (the first String is locale.toString())
+        private function loadSingleLocale(locale:Locale):Promise
+        {
         }
     }
 }
