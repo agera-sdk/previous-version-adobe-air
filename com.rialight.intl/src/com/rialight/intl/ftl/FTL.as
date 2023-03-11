@@ -339,9 +339,25 @@ package com.rialight.intl.ftl
                                 throw new Error('Fallback is not a supported locale: ' + localeAsStr);
                             }
                             var resPath:String = format('$1/$2/$3.ftl', [self.m_assetSource, localePathComp, fileName]);
-                            // perform HTTP request
-                            ...
-                            return;
+                            return new Promise(function(resolve:Function, reject:Function):void
+                            {
+                                // perform HTTP request
+                                var urlReq:URLRequest = new URLRequest(resPath);
+                                urlReq.method = 'get';
+                                urlReq.contentType = 'application/text';
+                                var urlLoader:URLLoader = new URLLoader;
+                                urlLoader.addEventListener('complete', function(e:*):void
+                                {
+                                    FTL.addFTLBundleResource(fileName, urlLoader.data, bundle);
+                                    resolve(undefined);
+                                });
+                                urlLoader.addEventListener('ioError', function(e:*):void
+                                {
+                                    trace('Failed to load resource at ' + resPath);
+                                    reject(undefined);
+                                });
+                                urlLoader.load(urlReq);
+                            });
                         }
                     )
                 )
