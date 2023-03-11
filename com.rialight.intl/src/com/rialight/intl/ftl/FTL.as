@@ -404,5 +404,88 @@ package com.rialight.intl.ftl
                 _enumerateFallbacksToSet(item, output);
             }
         }
+
+        /**
+         * Retrieves message and format it. Returns <code>null</code> if undefined.
+         */
+        public function getMessage(id:String, args:* = undefined, errors:Array = null):String
+        {
+            if (!m_currentLocale)
+            {
+                return null;
+            }
+            return _getMessageByLocale(id, m_currentLocale.toString(), args, errors);
+        }
+
+        private function _getMessageByLocale(id:String, locale:String, args:*, errors:Array):String
+        {
+            var assets:FluentBundle = m_assets.get(locale);
+            if (assets)
+            {
+                var msg:* = assets.getMessage(id);
+                if (msg !== undefined)
+                {
+                    return assets.formatPattern(msg.value, args, errors);
+                }
+            }
+            var fallbacks:Array = m_fallbacks.get(locale);
+            if (fallbacks)
+            {
+                for each (var fl:String in fallbacks)
+                {
+                    var r:String = _getMessageByLocale(id, fl, args, errors);
+                    if (r !== null)
+                    {
+                        return r;
+                    }
+                }
+            }
+            return null;
+        }
+
+        /**
+         * Determines if message is defined.
+         */
+        public function hasMessage(id:String):Boolean
+        {
+            if (!m_currentLocale)
+            {
+                return null;
+            }
+            return m_currentLocale ? _hasMessageByLocale(id, m_currentLocale.toString()) : false;
+        }
+
+        private function _hasMessageByLocale(id:String, locale:String):Boolean
+        {
+            var assets:FluentBundle = m_assets.get(locale);
+            if (assets)
+            {
+                var msg:* = assets.getMessage(id);
+                if (msg !== undefined)
+                {
+                    return true;
+                }
+            }
+            var fallbacks:Array = m_fallbacks.get(locale);
+            if (fallbacks)
+            {
+                for each (var fl:String in fallbacks)
+                {
+                    if (_hasMessageByLocale(id, fl))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return null;
+        }
+
+        public function clone():FTL
+        {
+            var r:FTL = new FTL(PRIVATE_CONSTRUCTOR);
+            r.m_currentLocale = this.m_currentLocale;
+            ...
+            return r;
+        }
     }
 }
