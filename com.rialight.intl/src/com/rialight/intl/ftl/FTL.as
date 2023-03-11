@@ -333,6 +333,13 @@ package com.rialight.intl.ftl
                     (
                         function(fileName:String):Promise
                         {
+                            var localePathComp:* = self.m_localeToPathComponents.get(localeAsStr);
+                            if (localePathComp === undefined)
+                            {
+                                throw new Error('Fallback is not a supported locale: ' + localeAsStr);
+                            }
+                            var resPath:String = format('$1/$2/$3.ftl', [self.m_assetSource, localePathComp, fileName]);
+                            // perform HTTP request
                             ...
                             return;
                         }
