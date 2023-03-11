@@ -222,7 +222,25 @@ package com.rialight.intl.ftl
          */
         public function load(newLocale:Locale = null):Promise
         {
-            //
+            newLocale ||= m_defaultLocale;
+            if (!this.supportsLocale(newLocale))
+            {
+                throw new ArgumentError('Unsupported locale: ' + newLocale.toString());
+            }
+            var self:FTL = this;
+            return new Promise(function(resolve:Function, reject:Function):void
+            {
+                var toLoad:Set = new Set([newLocale]);
+                self._enumerateFallbacks(newLocale.toString(), toLoad);
+
+                var locale:Locale = null;
+
+                var newAssets:Map = new Map;
+                for each (locale in toLoad)
+                {
+                    var res:FluentBundle = self.loadSingleLocale(locale);
+                }
+            });
         }
     }
 }
