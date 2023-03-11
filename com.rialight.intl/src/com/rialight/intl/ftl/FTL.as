@@ -32,7 +32,7 @@ package com.rialight.intl.ftl
 
         private var m_defaultLocale:Locale;
 
-        // Map.<String, Vector.<String>>
+        // Map.<String, [String]>
         private var m_fallbacks:Map = new Map;
 
         // Map.<String, FluentBundle>
@@ -246,13 +246,13 @@ package com.rialight.intl.ftl
             return new Promise(function(resolve:Function, reject:Function):void
             {
                 var toLoad:Set = new Set([newLocale]);
-                self._enumerateFallbacks(newLocale.toString(), toLoad);
+                self._enumerateFallbacksToSet(newLocale.toString(), toLoad);
 
                 var newAssets:Map = new Map;
                 Promise
                     .all
                     (
-                        toLoad.toArray().map(function(a:Locale):Promise { return self.loadSingleLocale(a) })
+                        toLoad.toArray().map(function(a:Locale):Promise { return self.loadSingleLocale(a); })
                     )
                     .then(function(res:Array):void
                     {
@@ -357,7 +357,15 @@ package com.rialight.intl.ftl
                                     trace('Failed to load resource at ' + resPath);
                                     reject(undefined);
                                 });
-                                urlLoader.load(urlReq);
+                                try
+                                {
+                                    urlLoader.load(urlReq);
+                                }
+                                catch (err:*)
+                                {
+                                    trace('Failed to load resource at ' + resPath);
+                                    reject(undefined);
+                                }
                             });
                         }
                     )
@@ -366,6 +374,34 @@ package com.rialight.intl.ftl
                     {
                         return [localeAsStr, bundle];
                     });
+            }
+        } // loadSingleLocale
+
+        private function _enumerateFallbacks(locale:String, output:Vector.<Locale>):void
+        {
+            var list:Array = this.m_fallbacks.get(locale);
+            if (!list)
+            {
+                return;
+            }
+            for each (var item:String in list)
+            {
+                output.push(new Locale(item));
+                _enumerateFallbacks(item, output);
+            }
+        }
+
+        private function _enumerateFallbacksToSet(locale:String, output:Set):void
+        {
+            var list:Array = this.m_fallbacks.get(locale);
+            if (!list)
+            {
+                return;
+            }
+            for each (var item:String in list)
+            {
+                output.add(new Locale(item));
+                _enumerateFallbacksToSet(item, output);
             }
         }
     }
