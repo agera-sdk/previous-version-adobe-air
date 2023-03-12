@@ -35,7 +35,7 @@ package com.rialight.intl.ftl.internals.bundle
             return !!this.exec(str);
         }
 
-        public  function exec(str:String):*
+        public function exec(str:String):*
         {
             if (!sticky)
             {
