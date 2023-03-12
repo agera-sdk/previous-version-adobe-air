@@ -252,7 +252,7 @@ package com.rialight.intl.ftl
                 Promise
                     .all
                     (
-                        toLoad.toArray().map(function(a:Locale):Promise { return self.loadSingleLocale(a); })
+                        toLoad.toArray().map(function(a:Locale, ..._):Promise { return self.loadSingleLocale(a); })
                     )
                     .then(function(res:Array):void
                     {
@@ -331,7 +331,7 @@ package com.rialight.intl.ftl
                 (
                     self._assetFilesAsUntyped.map
                     (
-                        function(fileName:String):Promise
+                        function(fileName:String, ..._):Promise
                         {
                             var localePathComp:* = self.m_localeToPathComponents.get(localeAsStr);
                             if (localePathComp === undefined)
