@@ -33,7 +33,7 @@ package com.rialight.intl.ftl.internals.ast
 
         override public function clone():BaseNode
         {
-            function cloneDeep(a:*):*
+            function cloneDeep(a:*, ..._):*
             {
                 if (a is BaseNode)
                 {
@@ -41,7 +41,7 @@ package com.rialight.intl.ftl.internals.ast
                 }
                 if (a is Array)
                 {
-                    return (a as Array).map(cloneDeep);
+                    return a.map(cloneDeep);
                 }
                 return a;
             }

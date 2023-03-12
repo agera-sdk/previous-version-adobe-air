@@ -51,7 +51,7 @@ package com.rialight.intl.ftl
         public function FTLBundle(locales:*, options:* = undefined)
         {
             options ||= {};
-            this.locales = locales is Array ? locales as Array : [locales];
+            this.locales = locales is Array ? locales : [locales];
             var functions:* = options.functions;
             var useIsolating:Boolean = options.useIsolating === undefined ? true : options.useIsolating;
             var transform:Function = options.transform !== undefined ? options.transform : function(v:String):String { return v; };

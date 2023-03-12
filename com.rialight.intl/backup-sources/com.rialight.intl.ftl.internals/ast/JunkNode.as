@@ -33,7 +33,7 @@ package com.rialight.intl.ftl.internals.ast
             var r:BaseNode = new JunkNode(
                 this.content
             );
-            JunkNode(r).annotations = this.annotations.map(function(a:AnnotationNode):* { return a.clone(); });
+            JunkNode(r).annotations = this.annotations.map(function(a:AnnotationNode, ..._):* { return a.clone(); });
             SyntaxNode(r).span = SpanNode(this.span.clone());
             return r;
         }

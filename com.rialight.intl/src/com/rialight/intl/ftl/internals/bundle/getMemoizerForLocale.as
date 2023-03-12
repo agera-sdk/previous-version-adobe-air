@@ -10,7 +10,7 @@ package com.rialight.intl.ftl.internals.bundle
      */
     public function getMemoizerForLocale(locales:*):Map
     {
-        const stringLocale:String = locales is Array ? (locales as Array).join(' ') : String(locales);
+        const stringLocale:String = locales is Array ? locales.join(' ') : String(locales);
         var memoizer:* = cache.get(stringLocale);
         if (memoizer === undefined)
         {

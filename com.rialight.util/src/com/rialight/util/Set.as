@@ -24,11 +24,10 @@ package com.rialight.util
         public function Set(argumentValue:* = undefined)
         {
             var v:*;
-            var a:Array = null;
 
             if (argumentValue is Array)
             {
-                for each (v in argumentValue as Array)
+                for each (v in argumentValue)
                 {
                     if (m_values.indexOf(v) == -1)
                     {

@@ -39,7 +39,7 @@ package com.rialight.intl.ftl.internals.ast
             var r:BaseNode = new TermNode(
                 IdentifierNode(this.id.clone()),
                 PatternNode(this.value.clone()),
-                this.attributes.map(function(a:AttributeNode):* { return a.clone(); }),
+                this.attributes.map(function(a:AttributeNode, ..._):* { return a.clone(); }),
                 this.comment ? CommentNode(this.comment.clone()) : null
             );
             SyntaxNode(r).span = SpanNode(this.span.clone());

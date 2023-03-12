@@ -25,7 +25,7 @@ package com.rialight.intl.ftl.internals.ast
         override public function clone():BaseNode
         {
             var r:BaseNode = new PatternNode(
-                this.elements.map(function(a:BaseNode):* { return a.clone(); })
+                this.elements.map(function(a:BaseNode, ..._):* { return a.clone(); })
             );
             SyntaxNode(r).span = SpanNode(this.span.clone());
             return r;

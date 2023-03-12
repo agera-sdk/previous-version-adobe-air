@@ -32,7 +32,7 @@ package com.rialight.intl.ftl.internals.ast
         {
             var r:BaseNode = new SelectExpressionNode(
                 SyntaxNode(this.selector.clone()),
-                this.variants.map(function(a:BaseNode):* { return a.clone(); })
+                this.variants.map(function(a:BaseNode, ..._):* { return a.clone(); })
             );
             SyntaxNode(r).span = SpanNode(this.span.clone());
             return r;

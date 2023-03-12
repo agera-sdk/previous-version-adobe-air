@@ -65,17 +65,15 @@ package com.rialight.util
         public function Map(argumentValue:* = undefined)
         {
             var v:*;
-            var a:Array = null;
 
             if (argumentValue is Array)
             {
-                for each (v in argumentValue as Array)
+                for each (v in argumentValue)
                 {
                     if (v is Array)
                     {
-                        a = v as Array;
-                        this.m_keys.push(a[0]);
-                        this.m_values.push(a[1]);
+                        this.m_keys.push(v[0]);
+                        this.m_values.push(v[1]);
                     }
                     else
                     {

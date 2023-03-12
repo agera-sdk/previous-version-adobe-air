@@ -108,12 +108,12 @@ package com.rialight.intl.ftl
             for (var fallbackUnparsedLocale:String in fallbacks)
             {
                 var fallbackParsedLocale:Locale = parseLocaleOrThrow(fallbackUnparsedLocale);
-                var fallbackArray:Array = fallbacks[fallbackUnparsedLocale] as Array;
+                var fallbackArray:* = fallbacks[fallbackUnparsedLocale];
                 if (!fallbackArray)
                 {
                     throw new ArgumentError('options.fallbacks must map Locales to Arrays');
                 }
-                m_fallbacks.set(fallbackParsedLocale.toString(), fallbackArray.map(function(a:*):String
+                m_fallbacks.set(fallbackParsedLocale.toString(), fallbackArray.map(function(a:*, ..._):String
                 {
                     if (typeof a !== 'string')
                     {
@@ -136,7 +136,12 @@ package com.rialight.intl.ftl
             {
                 throw new ArgumentError('options.assetFiles must be an Array');
             }
-            m_assetFiles = new Vector.<String>(options.assetFiles as Array);
+            m_assetFiles = new Vector.<String>;
+            // cannot construct like new Vector.<String>(untypedArray)
+            for each (var fileName:String in options.assetFiles)
+            {
+                m_assetFiles.push(fileName);
+            }
             if (typeof options.cleanUnusedAssets !== 'boolean')
             {
                 throw new ArgumentError('options.cleanUnusedAssets must be a Boolean');

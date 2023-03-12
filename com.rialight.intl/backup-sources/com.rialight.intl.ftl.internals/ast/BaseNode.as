@@ -39,8 +39,8 @@ package com.rialight.intl.ftl.internals.ast
                 }
                 if (thisVal is Array && otherVal is Array)
                 {
-                    var thisVal_asArray:Array = thisVal as Array;
-                    var otherVal_asArray:Array = otherVal as Array;
+                    var thisVal_asArray:* = thisVal;
+                    var otherVal_asArray:* = otherVal;
                     if (thisVal_asArray.length !== otherVal_asArray.length)
                     {
                         return false;

@@ -35,7 +35,7 @@ package com.rialight.util
         {
             argumentsObject = Map(argumentsObject).toPlainObject();
         }
-        return base.replace(/\$([a-z0-9]+|\<[a-z0-9\-_]+\>|\$)/gi, function(_:*, s:String):String
+        return base.replace(/\$([a-z0-9]+|\<[a-z0-9\-_]+\>|\$)/gi, function(_:*, s:String, ..._):String
         {
             return s == '$' ? '$' : String(argumentsObject[s.replace('<', '').replace('>', '')]);
         });

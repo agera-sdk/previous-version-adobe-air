@@ -31,8 +31,8 @@ package com.rialight.intl.ftl.internals.ast
         override public function clone():BaseNode
         {
             var r:BaseNode = new CallArgumentsNode(
-                this.positional.map(function(a:BaseNode):* { return a.clone(); }),
-                this.named.map(function(a:BaseNode):* { return a.clone(); })
+                this.positional.map(function(a:BaseNode, ..._):* { return a.clone(); }),
+                this.named.map(function(a:BaseNode, ..._):* { return a.clone(); })
             );
             SyntaxNode(r).span = SpanNode(this.span.clone());
             return r;
