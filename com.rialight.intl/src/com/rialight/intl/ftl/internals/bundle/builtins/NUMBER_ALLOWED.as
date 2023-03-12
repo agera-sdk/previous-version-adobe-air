@@ -5,7 +5,7 @@ package com.rialight.intl.ftl.internals.bundle.builtins
     /**
      * @private
      */
-    internal const NUMBER_ALLOWED:Vector.<String> = new Vector.<String>
+    internal const NUMBER_ALLOWED:Vector.<String> = new <String>
     [
         'unitDisplay',
         'currencyDisplay',
