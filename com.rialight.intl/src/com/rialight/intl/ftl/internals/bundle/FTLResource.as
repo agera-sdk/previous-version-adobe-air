@@ -550,6 +550,7 @@ package com.rialight.intl.ftl.internals.bundle
                     case '[':
                     case '*':
                     case '}':
+                    case '':
                     case undefined: // EOF
                         // A special character. End the Pattern.
                         return false;
