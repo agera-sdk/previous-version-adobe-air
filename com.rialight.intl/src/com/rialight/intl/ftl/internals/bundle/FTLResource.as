@@ -430,7 +430,7 @@ package com.rialight.intl.ftl.internals.bundle
                     {
                         throw new SyntaxError('Expected variant value');
                     }
-                    variants[count++] = {key: key, value: value};
+                    variants[count++] = new VariantNode(key, value);
                 }
 
                 if (count === 0)
