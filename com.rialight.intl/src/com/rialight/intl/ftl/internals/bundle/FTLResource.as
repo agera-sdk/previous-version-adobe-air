@@ -330,9 +330,9 @@ package com.rialight.intl.ftl.internals.bundle
                 if (test(RE_REFERENCE))
                 {
                     var reRefMatch:* = match(RE_REFERENCE);
-                    var sigil:String = reRefMatch[0];
-                    var name:String = reRefMatch[1];
-                    var attr:String = reRefMatch[2] === undefined ? null : reRefMatch[2];
+                    var sigil:String = reRefMatch[1];
+                    var name:String = reRefMatch[2];
+                    var attr:String = reRefMatch[3] === undefined ? null : reRefMatch[2];
 
                     if (sigil === '$')
                     {
