@@ -15,7 +15,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
      */
     internal function getArguments
     (
-        scope:FluentScope,
+        scope:FTLScope,
         args:Array
     ):*
     {

@@ -1,12 +1,12 @@
 package com.rialight.intl.ftl.types
 {
-    import com.rialight.intl.ftl.FluentScope;
+    import com.rialight.intl.ftl.FTLScope;
 
-    public class FluentType
+    public class FTLType
     {
         public var value:*;
 
-        public function FluentType(value:*)
+        public function FTLType(value:*)
         {
             this.value = value;
         }
@@ -16,7 +16,7 @@ package com.rialight.intl.ftl.types
             return this.value;
         }
 
-        public function toString(scope:FluentScope):String
+        public function toString(scope:FTLScope):String
         {
             return '';
         }

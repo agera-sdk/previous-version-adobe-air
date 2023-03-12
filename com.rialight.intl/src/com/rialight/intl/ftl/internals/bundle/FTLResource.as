@@ -9,7 +9,7 @@ package com.rialight.intl.ftl.internals.bundle
     /**
      * @private
      */
-    public final class FluentResource
+    public final class FTLResource
     {
         // This regex is used to iterate through the beginnings of messages and terms.
         // With the /m flag, the ^ matches at the beginning of every line.
@@ -61,7 +61,7 @@ package com.rialight.intl.ftl.internals.bundle
 
         public var body:Array;
 
-        public function FluentResource(source:String)
+        public function FTLResource(source:String)
         {
             this.body = [];
 

@@ -14,7 +14,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
      *
      * @private
      */
-    internal function resolvePattern(scope:FluentScope, value:*):*
+    internal function resolvePattern(scope:FTLScope, value:*):*
     {
         // resolve a simple pattern.
         if (typeof value === 'string')

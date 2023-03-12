@@ -15,14 +15,14 @@ package com.rialight.intl.ftl.internals.bundle.resolver
      */
     public function resolveComplexPattern
     (
-        scope:FluentScope,
+        scope:FTLScope,
         ptn:Array
     ):*
     {
         if (scope.dirty[ptn])
         {
             scope.reportError(new RangeError('Cyclic reference'));
-            return new FluentNone;
+            return new FTLNone;
         }
 
         // tag the pattern as dirty for the purpose of the current resolution.

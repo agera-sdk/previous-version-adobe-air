@@ -13,7 +13,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
      */
     internal function resolveTermReference
     (
-        scope:FluentScope,
+        scope:FTLScope,
         expr:TermReferenceNode
     ):*
     {
@@ -26,7 +26,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
         if (!term)
         {
             scope.reportError(new ReferenceError('Unknown term: ' + id));
-            return new FluentNone(id);
+            return new FTLNone(id);
         }
 
         if (attr)
@@ -41,7 +41,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
                 return resolved;
             }
             scope.reportError(new ReferenceError('Unknown attribute: ' + attr));
-            return new FluentNone(id + '.' + attr);
+            return new FTLNone(id + '.' + attr);
         }
 
         scope.params = getArguments(scope, args).named;

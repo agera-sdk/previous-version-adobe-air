@@ -13,7 +13,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
      */
     internal function resolveSelectExpression
     (
-        scope:FluentScope,
+        scope:FTLScope,
         expr:SelectExpressionNode
     ):*
     {
@@ -22,7 +22,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
         var star:Number = expr.star;
 
         var sel:* = resolveExpression(scope, selector);
-        if (sel is FluentNone)
+        if (sel is FTLNone)
         {
             return getDefault(scope, variants, star);
         }

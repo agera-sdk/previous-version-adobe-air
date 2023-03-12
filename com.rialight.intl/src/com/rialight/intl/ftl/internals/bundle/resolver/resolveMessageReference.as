@@ -13,7 +13,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
      */
     internal function resolveMessageReference
     (
-        scope:FluentScope,
+        scope:FTLScope,
         expr:MessageReferenceNode
     ):*
     {
@@ -24,7 +24,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
         if (!message)
         {
             scope.reportError(new ReferenceError('Unknown message: ' + name));
-            return new FluentNone(name);
+            return new FTLNone(name);
         }
 
         if (attr)
@@ -35,7 +35,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
                 return resolvePattern(scope, attribute);
             }
             scope.reportError(new ReferenceError('Unknown attribute: ' + attr));
-            return new FluentNone(name + '.' + attr);
+            return new FTLNone(name + '.' + attr);
         }
 
         if (message.value)
@@ -44,6 +44,6 @@ package com.rialight.intl.ftl.internals.bundle.resolver
         }
 
         scope.reportError(new ReferenceError('No value: ' + name));
-        return new FluentNone(name);
+        return new FTLNone(name);
     }
 }

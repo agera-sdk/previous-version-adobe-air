@@ -11,12 +11,12 @@ package com.rialight.intl.ftl
 
     /**
      * Provides manipulations for FTL of a single locale. You need not
-     * construct <code>FluentBundle</code> explicitly.
+     * construct <code>FTLBundle</code> explicitly.
      */
-    public final class FluentBundle
+    public final class FTLBundle
     {
         /**
-         * List of locales associated to the <code>FluentBundle</code> object.
+         * List of locales associated to the <code>FTLBundle</code> object.
          */
         public var locales:Array;
 
@@ -48,7 +48,7 @@ package com.rialight.intl.ftl
         /**
          * @private
          */
-        public function FluentBundle(locales:*, options:* = undefined)
+        public function FTLBundle(locales:*, options:* = undefined)
         {
             options ||= {};
             this.locales = locales is Array ? locales as Array : [locales];
@@ -117,7 +117,7 @@ package com.rialight.intl.ftl
          */
         public function addResource
         (
-            res:FluentResource,
+            res:FTLResource,
             options:* = undefined
         ):Vector.<Error>
         {
@@ -132,7 +132,7 @@ package com.rialight.intl.ftl
                 if (entry.id.startsWith('-'))
                 {
                     // identifiers starting with a dash (-) define terms. terms are private
-                    // and cannot be retrieved from FluentBundle.
+                    // and cannot be retrieved from FTLBundle.
                     if (allowOverrides === false && this._terms.has(entry.id))
                     {
                         errors.push
@@ -178,10 +178,10 @@ package com.rialight.intl.ftl
             }
 
             // resolve a complex pattern.
-            var scope:FluentScope = new FluentScope(this, errors, args);
+            var scope:FTLScope = new FTLScope(this, errors, args);
             try
             {
-                var value:FluentType = resolveComplexPattern(scope, pattern);
+                var value:FTLType = resolveComplexPattern(scope, pattern);
                 return value.toString(scope);
             }
             catch (err:*)
@@ -189,7 +189,7 @@ package com.rialight.intl.ftl
                 if (!!scope.errors && (err is Error))
                 {
                     scope.errors.push(err);
-                    return (new FluentNone).toString(scope);
+                    return (new FTLNone).toString(scope);
                 }
                 throw err;
             }

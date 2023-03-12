@@ -1,22 +1,22 @@
 package com.rialight.intl.ftl.types
 {
     import com.rialight.intl.*;
-    import com.rialight.intl.ftl.FluentScope;
+    import com.rialight.intl.ftl.FTLScope;
 
-    public class FluentDateTime extends FluentType
+    public class FTLDateTime extends FTLType
     {
         /**
          * Options passed to <code>IntlDateTimeFormat</code>.
          */
         public var opts:*;
 
-        public function FluentDateTime(value:Number, opts:* = undefined)
+        public function FTLDateTime(value:Number, opts:* = undefined)
         {
             super(value);
             this.opts = opts || {};
         }
 
-        override public function toString(scope:FluentScope):String
+        override public function toString(scope:FTLScope):String
         {
             try
             {

@@ -15,7 +15,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
      */
     internal function getDefault
     (
-        scope:FluentScope,
+        scope:FTLScope,
         variants:Vector.<VariantNode>,
         star:Number
     ):*
@@ -26,6 +26,6 @@ package com.rialight.intl.ftl.internals.bundle.resolver
         }
 
         scope.reportError(new RangeError('No default'));
-        return new FluentNone;
+        return new FTLNone;
     }
 }

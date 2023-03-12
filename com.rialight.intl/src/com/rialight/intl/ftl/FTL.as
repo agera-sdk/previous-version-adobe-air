@@ -3,7 +3,7 @@ package com.rialight.intl.ftl
     import com.rialight.intl.*;
     import com.rialight.intl.ftl.types.*;
     import com.rialight.util.*;
-    import com.rialight.intl.ftl.internals.bundle.FluentResource;
+    import com.rialight.intl.ftl.internals.bundle.FTLResource;
 
     import flash.net.URLRequest;
     import flash.net.URLLoader;
@@ -35,7 +35,7 @@ package com.rialight.intl.ftl
         // Map.<String, [String]>
         private var m_fallbacks:Map = new Map;
 
-        // Map.<String, FluentBundle>
+        // Map.<String, FTLBundle>
         private var m_assets:Map = new Map;
 
         private var m_assetSource:String;
@@ -56,11 +56,11 @@ package com.rialight.intl.ftl
             }
         }
 
-        private static function addFTLBundleResource(fileName:String, source:String, bundle:FluentBundle):Boolean
+        private static function addFTLBundleResource(fileName:String, source:String, bundle:FTLBundle):Boolean
         {
             try
             {
-                var res:FluentResource = new FluentResource(source);
+                var res:FTLResource = new FTLResource(source);
                 var resErrors:Vector.<Error> = bundle.addResource(res);
                 if (resErrors.length > 0)
                 {
@@ -151,7 +151,7 @@ package com.rialight.intl.ftl
 
         /**
          * Adds a bundle initializer. This allows defining custom functions and more.
-         * @param fn Function of the signature <code>function(locale:Locale, bundle:FluentBundle):void</code>.
+         * @param fn Function of the signature <code>function(locale:Locale, bundle:FTLBundle):void</code>.
          */
         public function addBundleInitializer(fn:Function):void
         {
@@ -219,7 +219,7 @@ package com.rialight.intl.ftl
         }
 
         /**
-         * Adds a callback function to initialize the <code>FluentBundle</code> object of a locale.
+         * Adds a callback function to initialize the <code>FTLBundle</code> object of a locale.
          * The callback is called when the locale is loaded.
          */
         /*
@@ -256,7 +256,7 @@ package com.rialight.intl.ftl
                     )
                     .then(function(res:Array):void
                     {
-                        // res:[[String, FluentBundle]]
+                        // res:[[String, FTLBundle]]
                         if (self.m_cleanUnusedAssets)
                         {
                             self.m_assets.clear();
@@ -292,12 +292,12 @@ package com.rialight.intl.ftl
             return r;
         }
 
-        // should resolve to [String, FluentBundle] (the first String is locale.toString())
+        // should resolve to [String, FTLBundle] (the first String is locale.toString())
         private function loadSingleLocale(locale:Locale):Promise
         {
             var self:FTL = this;
             var localeAsStr:String = locale.toString();
-            var bundle:FluentBundle = new FluentBundle(locale);
+            var bundle:FTLBundle = new FTLBundle(locale);
 
             if (self.m_loadMethod == 'fileSystem')
             {
@@ -419,7 +419,7 @@ package com.rialight.intl.ftl
 
         private function _getMessageByLocale(id:String, locale:String, args:*, errors:Array):String
         {
-            var assets:FluentBundle = m_assets.get(locale);
+            var assets:FTLBundle = m_assets.get(locale);
             if (assets)
             {
                 var msg:* = assets.getMessage(id);
@@ -457,7 +457,7 @@ package com.rialight.intl.ftl
 
         private function _hasMessageByLocale(id:String, locale:String):Boolean
         {
-            var assets:FluentBundle = m_assets.get(locale);
+            var assets:FTLBundle = m_assets.get(locale);
             if (assets)
             {
                 var msg:* = assets.getMessage(id);

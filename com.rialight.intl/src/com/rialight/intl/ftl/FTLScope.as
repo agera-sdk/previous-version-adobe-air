@@ -12,18 +12,18 @@ package com.rialight.intl.ftl
     /**
      * @private
      */
-    public final class FluentScope
+    public final class FTLScope
     {
-        public var bundle:FluentBundle;
+        public var bundle:FTLBundle;
         public var errors:Array;
         public var args:*;
         public var dirty:Dictionary = new Dictionary(true);
         public var params:* = null;
         public var placeables:Number = 0;
 
-        public function FluentScope
+        public function FTLScope
         (
-            bundle:FluentBundle,
+            bundle:FTLBundle,
             errors:Array,
             args:*
         )

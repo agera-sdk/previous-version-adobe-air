@@ -15,7 +15,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
      */
     internal function resolveExpression
     (
-        scope:FluentScope,
+        scope:FTLScope,
         expr:ExpressionNode
     ):*
     {
@@ -25,7 +25,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
                 return StringLiteralNode(expr).value;
             case 'num':
                 var numLiteral:NumberLiteralNode = NumberLiteralNode(expr);
-                return new FluentNumber(numLiteral.value, {
+                return new FTLNumber(numLiteral.value, {
                     minimumFractionDigits: numLiteral.precision
                 });
             case 'var':
@@ -39,7 +39,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
             case 'select':
                 return resolveSelectExpression(scope, SelectExpressionNode(expr));
             default:
-                return new FluentNone;
+                return new FTLNone;
         }
     }
 }

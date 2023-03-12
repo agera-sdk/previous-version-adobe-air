@@ -13,7 +13,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
      */
     internal function resolveVariableReference
     (
-        scope:FluentScope,
+        scope:FTLScope,
         expr:VariableReferenceNode
     ):*
     {
@@ -28,7 +28,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
             }
             else
             {
-                return new FluentNone('$' + name);
+                return new FTLNone('$' + name);
             }
         }
         else if
@@ -44,11 +44,11 @@ package com.rialight.intl.ftl.internals.bundle.resolver
         else
         {
             scope.reportError(new ReferenceError('Unknown variable: $' + name));
-            return new FluentNone('$' + name);
+            return new FTLNone('$' + name);
         }
 
-        // return early if the argument already is an instance of FluentType.
-        if (arg is FluentType)
+        // return early if the argument already is an instance of FTLType.
+        if (arg is FTLType)
         {
             return arg;
         }
@@ -62,18 +62,18 @@ package com.rialight.intl.ftl.internals.bundle.resolver
             }
             case 'number':
             {
-                return new FluentNumber(arg);
+                return new FTLNumber(arg);
             }
             default:
             {
                 if (arg is Date)
                 {
-                    return new FluentDateTime((arg as Date).getTime());
+                    return new FTLDateTime((arg as Date).getTime());
                 }
                 scope.reportError(
                     new TypeError(format('Variable type not supported: $$$1, $2', [name, typeof arg]))
                 );
-                return new FluentNone('$' + name);
+                return new FTLNone('$' + name);
             }
         }
     }

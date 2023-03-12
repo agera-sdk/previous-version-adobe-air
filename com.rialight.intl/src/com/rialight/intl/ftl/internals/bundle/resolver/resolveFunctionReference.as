@@ -13,7 +13,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
      */
     internal function resolveFunctionReference
     (
-        scope:FluentScope,
+        scope:FTLScope,
         expr:FunctionReferenceNode
     ):*
     {
@@ -21,18 +21,18 @@ package com.rialight.intl.ftl.internals.bundle.resolver
         var args:Array = expr.args;
 
         // some functions are built-in. others may be provided by the runtime via
-        // the `FluentBundle` constructor.
+        // the `FTLBundle` constructor.
         var func:* = scope.bundle._functions[name];
         if (!func)
         {
             scope.reportError(new ReferenceError('Unknown function: ' + name + '()'));
-            return new FluentNone(name + '()');
+            return new FTLNone(name + '()');
         }
 
         if (typeof func !== 'function')
         {
             scope.reportError(new TypeError('Function ' + name + '() is not callable'));
-            return new FluentNone(name + '()');
+            return new FTLNone(name + '()');
         }
 
         try
@@ -43,7 +43,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
         catch (err:*)
         {
             scope.reportError(err);
-            return new FluentNone(name + '()');
+            return new FTLNone(name + '()');
         }
     }
 }

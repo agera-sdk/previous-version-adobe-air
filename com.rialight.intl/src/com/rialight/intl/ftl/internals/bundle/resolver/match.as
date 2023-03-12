@@ -13,7 +13,7 @@ package com.rialight.intl.ftl.internals.bundle.resolver
      *
      * @private
      */
-    internal function match(scope:FluentScope, selector:*, key:*):Boolean
+    internal function match(scope:FTLScope, selector:*, key:*):Boolean
     {
         if (key === selector)
         {
@@ -24,22 +24,22 @@ package com.rialight.intl.ftl.internals.bundle.resolver
         // XXX consider comparing options too, e.g. minimumFractionDigits.
         if
         (
-            key is FluentNumber &&
-            selector is FluentNumber &&
-            FluentNumber(key).value === FluentNumber(selector).value
+            key is FTLNumber &&
+            selector is FTLNumber &&
+            FTLNumber(key).value === FTLNumber(selector).value
         )
         {
             return true;
         }
 
-        if ((selector is FluentNumber) && typeof key === 'string')
+        if ((selector is FTLNumber) && typeof key === 'string')
         {
             var category:* = scope
                 .memoizeIntlObject(
                     IntlPluralRules,
                     selector.opts
                 )
-                .select(FluentNumber(selector).value);
+                .select(FTLNumber(selector).value);
 
             if (key === category)
             {
