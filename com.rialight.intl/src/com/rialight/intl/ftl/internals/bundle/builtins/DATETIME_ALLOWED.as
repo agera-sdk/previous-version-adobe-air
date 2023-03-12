@@ -5,8 +5,8 @@ package com.rialight.intl.ftl.internals.bundle.builtins
     /**
      * @private
      */
-    internal const DATETIME_ALLOWED:Vector.<String> = new Vector.<String>
-    ([
+    internal const DATETIME_ALLOWED:Vector.<String> = new <String>
+    [
         'dateStyle',
         'timeStyle',
         'fractionalSecondDigits',
@@ -21,5 +21,5 @@ package com.rialight.intl.ftl.internals.bundle.builtins
         'minute',
         'second',
         'timeZoneName',
-    ]);
+    ];
 }

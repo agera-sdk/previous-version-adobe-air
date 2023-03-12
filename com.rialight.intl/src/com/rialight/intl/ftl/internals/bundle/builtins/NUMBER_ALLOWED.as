@@ -6,7 +6,7 @@ package com.rialight.intl.ftl.internals.bundle.builtins
      * @private
      */
     internal const NUMBER_ALLOWED:Vector.<String> = new Vector.<String>
-    ([
+    [
         'unitDisplay',
         'currencyDisplay',
         'useGrouping',
@@ -15,5 +15,5 @@ package com.rialight.intl.ftl.internals.bundle.builtins
         'maximumFractionDigits',
         'minimumSignificantDigits',
         'maximumSignificantDigits',
-    ]);
+    ];
 }

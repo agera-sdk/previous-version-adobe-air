@@ -9,7 +9,7 @@ package com.rialight.intl.ftl.internals.ast
     {
         public function equals(other:BaseNode, ignoredFields:Vector.<String> = null):Boolean
         {
-            ignoredFields ||= new Vector.<String>(['span']);
+            ignoredFields ||= new <String>['span'];
             var fieldName:String = '';
             const thisKeys:Set = this.getKeys();
             const otherKeys:Set = other.getKeys();

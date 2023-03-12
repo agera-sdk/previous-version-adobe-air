@@ -13,13 +13,13 @@ package com.rialight.intl
 
         private var m_fgLocale:flash.globalization.LocaleID;
 
-        private static const PARSE_ERROR_STATUS:Vector.<String> = new Vector.<String>
-        ([
+        private static const PARSE_ERROR_STATUS:Vector.<String> = new <String>
+        [
             LastOperationStatus.INVALID_CHAR_FOUND,
             LastOperationStatus.UNEXPECTED_TOKEN,
             LastOperationStatus.ILLEGAL_ARGUMENT_ERROR,
             LastOperationStatus.PARSE_ERROR,
-        ]);
+        ];
 
         public function Locale(tag:*)
         {
