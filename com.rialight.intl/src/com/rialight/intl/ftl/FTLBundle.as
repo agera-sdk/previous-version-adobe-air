@@ -72,7 +72,8 @@ package com.rialight.intl.ftl
         }
 
         /**
-         * Sets a customized Fluent function.
+         * Sets a customized Fluent function. <code>fn</code>
+         * is of the signature <code>function(positional:Array, named:*):*</code>.
          */
         public function setFunction(name:String, fn:Function):void
         {
@@ -81,6 +82,7 @@ package com.rialight.intl.ftl
 
         /**
          * Indicates a Fluent transform function.
+         * It is a function of the signature <code>function(text:String):String</code>.
          */
         public function get transform():Function
         {

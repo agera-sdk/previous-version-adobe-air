@@ -10,7 +10,7 @@ package com.rialight.intl.ftl
     import flash.utils.Dictionary;
 
     /**
-     * @private
+     * Represents a Fluent scope.
      */
     public final class FTLScope
     {
