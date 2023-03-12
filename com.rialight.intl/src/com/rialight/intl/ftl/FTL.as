@@ -317,8 +317,8 @@ package com.rialight.intl.ftl
                     try
                     {
                         var fileStream:FileStream = new FileStream;
-                        fileStream.open(new File(resPath), 'read');
-                        var source:String = fileStream.readUTF();
+                        fileStream.open(/^file:|app:|app-storage:/i.test(resPath) ? new File(resPath) : File.workingDirectory.resolvePath(resPath), 'read');
+                        var source:String = fileStream.readUTFBytes(fileStream.bytesAvailable);
                         fileStream.close();
                         FTL.addFTLBundleResource(fileName, source, bundle);
                     }
