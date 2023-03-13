@@ -202,7 +202,7 @@ package com.rialight.intl.ftl
         {
             if (m_currentLocale)
             {
-                var r:Vector.<Locale> = new Vector.<Locale>([m_currentLocale]);
+                var r:Vector.<Locale> = Vector.<Locale>([m_currentLocale]);
                 _enumerateFallbacks(m_currentLocale.toString(), r);
                 return r;
             }
