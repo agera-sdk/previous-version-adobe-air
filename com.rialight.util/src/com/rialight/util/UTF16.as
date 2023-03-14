@@ -1,4 +1,4 @@
-package com.rialight.intl.ftl.internals.bundle
+package com.rialight.util
 {
     /**
      * UTF-16 utility functions.
