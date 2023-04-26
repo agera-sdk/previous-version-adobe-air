@@ -334,7 +334,7 @@ package com.rialight.intl.ftl
             {
                 return Promise.all
                 (
-                    self._assetFilesAsUntyped.map
+                    self.m_assetFilesAsUntyped.map
                     (
                         function(fileName:String, ..._):Promise
                         {
