@@ -453,10 +453,6 @@ package com.rialight.intl.ftl
          */
         public function hasMessage(id:String):Boolean
         {
-            if (!m_currentLocale)
-            {
-                return null;
-            }
             return m_currentLocale ? _hasMessageByLocale(id, m_currentLocale.toString()) : false;
         }
 
@@ -482,7 +478,7 @@ package com.rialight.intl.ftl
                     }
                 }
             }
-            return null;
+            return false;
         }
 
         /**
